@@ -812,18 +812,18 @@ def main():
                 "If `do_predict` is True, then `predict_file` must be specified."
             )
 
-    if os.path.exists(args.output_dir) and os.listdir(
-            args.output_dir) and args.do_train:
-        raise ValueError(
-            "Output directory () already exists and is not empty.")
-    os.makedirs(args.output_dir, exist_ok=True)
+    #if os.path.exists(args.output_dir) and os.listdir(
+    #        args.output_dir) and args.do_train:
+    #    raise ValueError(
+    #        "Output directory () already exists and is not empty.")
+    #os.makedirs(args.output_dir, exist_ok=True)
 
     # Prepare Summary writer
-    if torch.distributed.get_rank() == 0 and args.job_name is not None:
-        args.summary_writer = get_summary_writer(name=args.job_name,
-                                                 base=args.output_dir)
-    else:
-        args.summary_writer = None
+    #if torch.distributed.get_rank() == 0 and args.job_name is not None:
+    #    args.summary_writer = get_summary_writer(name=args.job_name,
+    #                                             base=args.output_dir)
+    #else:
+    args.summary_writer = None
 
     tokenizer = BertTokenizer.from_pretrained(args.bert_model,
                                               do_lower_case=args.do_lower_case)
@@ -1144,14 +1144,14 @@ def main():
                     RawResult(unique_id=unique_id,
                               start_logits=start_logits,
                               end_logits=end_logits))
-        output_prediction_file = os.path.join(args.output_dir,
-                                              "predictions.json")
-        output_nbest_file = os.path.join(args.output_dir,
-                                         "nbest_predictions.json")
-        write_predictions(eval_examples, eval_features, all_results,
-                          args.n_best_size, args.max_answer_length,
-                          args.do_lower_case, output_prediction_file,
-                          output_nbest_file, args.verbose_logging)
+        #output_prediction_file = os.path.join(args.output_dir,
+        #                                      "predictions.json")
+        #output_nbest_file = os.path.join(args.output_dir,
+        #                                 "nbest_predictions.json")
+        #write_predictions(eval_examples, eval_features, all_results,
+        #                  args.n_best_size, args.max_answer_length,
+        #                  args.do_lower_case, output_prediction_file,
+        #                  output_nbest_file, args.verbose_logging)
 
 
 if __name__ == "__main__":
